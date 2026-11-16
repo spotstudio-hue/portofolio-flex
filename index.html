@@ -265,8 +265,8 @@ html.go .hero h1{animation-delay:.08s}html.go .hero .lead{animation-delay:.2s}ht
       <p data-i="st_p"></p>
     </div>
     <div class="stills">
-      <figure class="still land"><div class="ph"><img src="media/still_studio.jpg" alt="" loading="lazy" id="st1"></div><figcaption class="mono" id="stc1"></figcaption></figure>
-      <figure class="still port"><div class="ph"><img src="media/still_gym.jpg" alt="" loading="lazy" id="st2"></div><figcaption class="mono" id="stc2"></figcaption></figure>
+      <figure class="still land"><div class="ph"><img src="still_studio.jpg" alt="" loading="lazy" id="st1"></div><figcaption class="mono" id="stc1"></figcaption></figure>
+      <figure class="still port"><div class="ph"><img src="still_gym.jpg" alt="" loading="lazy" id="st2"></div><figcaption class="mono" id="stc2"></figcaption></figure>
     </div>
   </section>
 
@@ -384,7 +384,7 @@ W.forEach((w,i)=>{
   a.innerHTML=`<div class="pm"><span class="idx mono">${String(i+1).padStart(2,'0')} / ${W.length}</span><span class="chip mono" data-tag></span><h3 data-ttl></h3><p data-sub></p>
     <div class="pmeta mono"><span>${fmt(w.d)}</span><span>${w.ar16?'1920×1080':'9:16'}</span></div>
     <button class="pill solid" data-watch><span class="pi">${PLAY.replace('<svg','<svg width="10" height="10" style="fill:currentColor"')}</span><span data-wl></span></button></div>
-    <div class="vw"><div class="vf" role="button" tabindex="0"><video muted loop playsinline preload="none" poster="media/${w.k}.jpg" data-src="media/${w.k}_full.mp4"></video>
+    <div class="vw"><div class="vf" role="button" tabindex="0"><video muted loop playsinline preload="none" poster="${w.k}.jpg" data-src="${w.k}_full.mp4"></video>
     <span class="sweep"></span><span class="vtag mono"><i></i>${fmt(w.d)}</span><span class="bigplay">${PLAY}</span></div></div>
     <div class="bdiv" aria-hidden="true"><span class="ln"></span><i class="ball"></i><span class="ln"></span><span class="mono" data-nx></span></div>`;
   const open=()=>openM(i);
@@ -488,7 +488,7 @@ function openM(i){
   feed.querySelectorAll('video').forEach(v=>v.pause());
   mbox.style.aspectRatio=w.ar16?'16/9':'9/16';
   mbox.style.width=w.ar16?'min(100%,1200px)':'min(100%,calc(min(90vh,1000px)*9/16))';
-  mv.poster=`media/${k}.jpg`;mv.src=`media/${k}_full.mp4`;mv.muted=false;
+  mv.poster=`${k}.jpg`;mv.src=`${k}_full.mp4`;mv.muted=false;
   modal.hidden=false;setCap();
   mv.play().catch(()=>{mv.muted=true;mv.play().catch(()=>{})});
   document.body.style.overflow='hidden';
@@ -564,7 +564,7 @@ if(THREE_OK){(function(){
   HERO_KEYS.forEach((k,i)=>{
     const m=new THREE.ShaderMaterial({vertexShader:vert,fragmentShader:frag,side:THREE.DoubleSide,
       uniforms:{map:{value:null},uLime:{value:new THREE.Color(0xD9FF3F)},uBend:{value:0},uTime:{value:0},uDim:{value:1}}});
-    loads.push(new Promise(res=>loader.load('media/'+k+'.jpg',t=>{t.minFilter=THREE.LinearFilter;t.generateMipmaps=false;m.uniforms.map.value=t;res()},undefined,()=>res())));
+    loads.push(new Promise(res=>loader.load(''+k+'.jpg',t=>{t.minFilter=THREE.LinearFilter;t.generateMipmaps=false;m.uniforms.map.value=t;res()},undefined,()=>res())));
     const mesh=new THREE.Mesh(geo,m),a=i/N*Math.PI*2;
     mesh.position.set(Math.sin(a)*R,Math.sin(a*2.0)*.55,Math.cos(a)*R);
     mesh.rotation.y=a;mesh.rotation.z=Math.sin(a*3)*.05;
